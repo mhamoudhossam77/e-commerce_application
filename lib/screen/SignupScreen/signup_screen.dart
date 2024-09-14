@@ -1,5 +1,7 @@
+import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
 import 'package:ecommerce/widget/my_Textformfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -79,19 +81,51 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(
                 height: 25.0,
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    padding:
-                        EdgeInsets.symmetric(vertical: 15.0, horizontal: 120.0)),
-                child: Text(
-                  "Sign up",
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                ),
+              BlocConsumer< AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if(state is SignupError){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text(
+                      state.message
+                    )));
+                  }
+
+                  if(state is SignupSucess){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      
+                      SnackBar(
+                        backgroundColor: Colors.green,
+                        content: 
+                    Text(state.model.message!),
+                    ));
+                  }
+                },
+                
+                builder: (context, state) {
+                  var cubit = AuthCubit.get(context);
+                  if(state is SignupLoading){
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ElevatedButton(
+                    onPressed: () {
+                     cubit.Signup(Username: _usernameController.text, email:  _emailController.text, password: _passwordController.text, phoneNumber:  _phoneController.text);
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        padding: EdgeInsets.symmetric(
+                            vertical: 15.0, horizontal: 120.0)),
+                    child: Text(
+                      "Sign up",
+                      style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  );
+                },
               ),
               SizedBox(
                 height: 25.0,
@@ -104,14 +138,16 @@ class _SignupScreenState extends State<SignupScreen> {
                     style: TextStyle(fontSize: 18.0, color: Colors.black),
                   ),
                   TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Login",
-                    style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold , color: Colors.white) ,
-                  ))
+                      onPressed: () {},
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ))
                 ],
               ),
-              
             ],
           ),
         ),

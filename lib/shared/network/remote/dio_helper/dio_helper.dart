@@ -3,7 +3,7 @@
 abstract class DioHelper{
   static Dio? _dio;  // object of dio
 
-  Future<void> initializeDio() async{   // function for initialize Dio
+   static Future<void> initializeDio() async{   // function for initialize Dio
 
     _dio ??= Dio(   
         BaseOptions( // control the baseurl
@@ -16,17 +16,18 @@ abstract class DioHelper{
 
   }
 
-  Future<Response>getRequest({
+ static Future<Response>getRequest({
     required String endpoint , 
    Map<String,dynamic>? queryParamters
    })async{  // function the type is a Future
            return await _dio!.get(endpoint , queryParameters: queryParamters);
   }
 
-    Future<Response>postRequest({
+   static Future<Response>postRequest({
     required String endpoint , 
-   Map<String,dynamic>? queryParamters
+   Map<String,dynamic>? queryParamters,
+   Map<String,dynamic>? data
    })async{  // function the type is a Future
-           return await _dio!.post(endpoint , queryParameters: queryParamters);
+           return await _dio!.post(endpoint , queryParameters: queryParamters ,data: data);
   }
 }
