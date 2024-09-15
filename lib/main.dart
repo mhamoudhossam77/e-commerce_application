@@ -1,6 +1,6 @@
 import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
 import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
-import 'package:ecommerce/screen/SignupScreen/signup_screen.dart';
+import 'package:ecommerce/screen/login-screen/login-screen.dart';
 import 'package:ecommerce/shared/network/remote/dio_helper/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +23,7 @@ void main() async {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:SignupScreen(),
+        home:LoginScreen(),
       ),
     );
   }
