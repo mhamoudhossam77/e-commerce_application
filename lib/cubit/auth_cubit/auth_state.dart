@@ -4,8 +4,12 @@ part of 'auth_cubit.dart';
 abstract class AuthState {}
 
 class AuthInitial extends AuthState {}
+
 class LoginLoading extends AuthState {}
-class LoginSucess extends AuthState {}
+class LoginSucess extends AuthState {
+  final LoginResponsModel model;
+  LoginSucess({required this.model});
+}
 class LoginError extends AuthState {
   final String message;
 

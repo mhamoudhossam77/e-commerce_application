@@ -1,29 +1,32 @@
 import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
 import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
 import 'package:ecommerce/screen/login-screen/login-screen.dart';
+import 'package:ecommerce/screen/signup-screen/signup-screen.dart';
+import 'package:ecommerce/shared/network/cache_helper/Cache_Helper.dart';
 import 'package:ecommerce/shared/network/remote/dio_helper/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   await DioHelper.initializeDio();
+  await CacheHelper.initializeCache();
+  await DioHelper.initializeDio();
   runApp(const MyApp());
 }
 
- class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) =>AppCubitCubit()),
-        BlocProvider(create: (_) =>AuthCubit())
+        BlocProvider(create: (_) => AppCubitCubit()),
+        BlocProvider(create: (_) => AuthCubit())
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home:LoginScreen(),
+        debugShowCheckedModeBanner: true,
+        home: LoginScreen(),
       ),
     );
   }

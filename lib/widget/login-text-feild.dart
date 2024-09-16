@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyTextFormFeild extends StatefulWidget {
+  final TextEditingController controller;
   final String title;
   final String labelText;
   final Icon prefixIcon;
@@ -9,6 +10,7 @@ class MyTextFormFeild extends StatefulWidget {
 
   const MyTextFormFeild({
     Key? key,
+    required this.controller,
     required this.title,
     required this.labelText,
     required this.prefixIcon,
@@ -36,7 +38,7 @@ class _MyTextFormFeild extends State<MyTextFormFeild> {
           widget.title,
           style: GoogleFonts.manrope(
             textStyle: const TextStyle(
-              fontSize: 40.0,
+              fontSize: 30.0,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -45,6 +47,7 @@ class _MyTextFormFeild extends State<MyTextFormFeild> {
           height: 15.0,
         ),
         TextFormField(
+          controller: widget.controller,
           obscureText: isObsecure,
           decoration: InputDecoration(
               border: const OutlineInputBorder(
@@ -58,7 +61,7 @@ class _MyTextFormFeild extends State<MyTextFormFeild> {
               suffixIcon: widget.isPassword
                   ? IconButton(
                       onPressed: () {
-                        StepState() {
+                        SetState() {
                           isObsecure = !isObsecure;
                         }
                       },

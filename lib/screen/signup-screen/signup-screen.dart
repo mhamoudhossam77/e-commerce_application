@@ -81,37 +81,35 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(
                 height: 25.0,
               ),
-              BlocConsumer< AuthCubit, AuthState>(
+              BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
-                  if(state is SignupError){
+                  if (state is SignupError) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.red,
-                      content: Text(
-                      state.message
-                    )));
+                        backgroundColor: Colors.red,
+                        content: Text(state.message)));
                   }
 
-                  if(state is SignupSucess){
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      
-                      SnackBar(
-                        backgroundColor: Colors.green,
-                        content: 
-                    Text(state.model.message!),
+                  if (state is SignupSucess) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      backgroundColor: Colors.green,
+                      content: Text(state.model.message!),
                     ));
                   }
                 },
-                
                 builder: (context, state) {
                   var cubit = AuthCubit.get(context);
-                  if(state is SignupLoading){
+                  if (state is SignupLoading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
                   }
                   return ElevatedButton(
                     onPressed: () {
-                     cubit.Signup(Username: _usernameController.text, email:  _emailController.text, password: _passwordController.text, phoneNumber:  _phoneController.text);
+                      cubit.Signup(
+                          Username: _usernameController.text,
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                          phoneNumber: _phoneController.text);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
