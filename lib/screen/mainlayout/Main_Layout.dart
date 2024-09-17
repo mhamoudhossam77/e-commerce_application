@@ -12,12 +12,6 @@ class MainLayout extends StatefulWidget {
 
 class _MainLayoutState extends State<MainLayout> {
   int currentIdx = 0;
-    List<Widget> screens = [
-      Scaffold(),
-      Scaffold(),
-      Scaffold(),
-      Scaffold(),
-    ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +57,6 @@ class _MainLayoutState extends State<MainLayout> {
           ),
         ],
       ),
-      body: screens[currentIdx],
     );
   }
 }

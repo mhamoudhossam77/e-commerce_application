@@ -20,31 +20,22 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height / 6,
               ),
               Text(
-                "LOGIN",
+                "Login",
                 style: GoogleFonts.manrope(
                   textStyle: TextStyle(
                     fontSize: 48.0,
                     fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Text(
-                "Login to buy our special products",
-                style: GoogleFonts.manrope(
-                  textStyle: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
@@ -110,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple,
+                      backgroundColor: Colors.white,
                       minimumSize: const Size(
                         double.infinity,
                         55.0,
@@ -125,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text(
                       "Login",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 18.0,
                       ),
                     ),
@@ -146,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                     child: const Text(
-                      "Register",
+                      "Signup",
                     ),
                   ),
                 ],
