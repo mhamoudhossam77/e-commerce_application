@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:ecommerce/cubit/app_cubit/app_cubit_state.dart';
+import 'package:ecommerce/model/categories-model.dart';
 import 'package:ecommerce/model/home-model.dart';
 import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
 import 'package:ecommerce/shared/network/remote/dio_helper/dio_helper.dart';
@@ -14,7 +15,7 @@ class AppCubitCubit extends Cubit<AppCubitState> {
   AppCubitCubit() : super(AppCubitInitial());
     static AppCubitCubit get(context) => BlocProvider.of(context);
   HomeModel? homeModel;
-
+  category_model? category;
   void getHomeData()async{
 
     emit(GetHomeDataLoading());
@@ -34,4 +35,21 @@ class AppCubitCubit extends Cubit<AppCubitState> {
 
   }
   
+  void getcategoriesData()async{
+
+    emit(GetcategoriesDataLoading());
+
+    Response response = await DioHelper.getRequest(endpoint:  CATEGORES);
+    
+
+    category = category_model.fromJson(response.data);
+
+    if( category!.status!){
+      emit(GetHomeDataSucess());
+    }else{
+      emit(GetcategoriesDataError());
+    }
+
+  }
+
 }

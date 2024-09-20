@@ -4,4 +4,4 @@ const REGISTER ="register";
 
 const HOME = "home";
 
-const SEARCH ="search";
+const CATEGORES = "categories";

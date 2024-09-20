@@ -1,8 +1,6 @@
+import 'package:ecommerce/screen/Categories_Screen/Categories_Screen.dart';
 import 'package:ecommerce/screen/home-screen/home-screen.dart';
 import 'package:flutter/material.dart';
-
-
-
 
 class MainLayout extends StatefulWidget {
   const MainLayout({Key? key}) : super(key: key);
@@ -13,14 +11,13 @@ class MainLayout extends StatefulWidget {
 
 class _MainLayoutState extends State<MainLayout> {
   int currentIdx = 0;
-    
+
   List<Widget> screens = [
     Homescreen(),
-       Scaffold(),
-      Scaffold(),
-      Scaffold(),
-      Scaffold(),
-     
+    CategoriesScreen(),
+    Scaffold(),
+    Scaffold(),
+    Scaffold(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -36,33 +33,33 @@ class _MainLayoutState extends State<MainLayout> {
         currentIndex: currentIdx,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
+            icon: Icon(
+              Icons.home,
+            ),
             label: "Home",
           ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.category,
-              ),
+            icon: Icon(
+              Icons.category,
+            ),
             label: "Categories",
           ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.shopping_cart,
-              ),
+            icon: Icon(
+              Icons.shopping_cart,
+            ),
             label: "Cart",
           ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite,
-              ),
+            icon: Icon(
+              Icons.favorite,
+            ),
             label: "Favourites",
           ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-              ),
+            icon: Icon(
+              Icons.person,
+            ),
             label: "Profile",
           ),
         ],
