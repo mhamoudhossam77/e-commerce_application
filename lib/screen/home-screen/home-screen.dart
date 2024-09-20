@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
+import 'package:ecommerce/cubit/app_cubit/app_cubit_state.dart';
 import 'package:ecommerce/model/home-model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -85,14 +86,16 @@ class _Homescreen extends State<Homescreen> {
                     SizedBox(
                       height: 230,
                       child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 1,
-                              mainAxisSpacing: 10,
-                              childAspectRatio: 12 / 9),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1,
+                                  mainAxisSpacing: 10,
+                                  childAspectRatio: 12 / 9),
                           scrollDirection: Axis.horizontal,
                           itemCount: cubit.homeModel!.data!.products!.length,
                           itemBuilder: (context, index) {
-                            var product = cubit.homeModel!.data!.products![index];
+                            var product =
+                                cubit.homeModel!.data!.products![index];
                             return Card(
                                 color: Colors.white,
                                 child: Column(children: [
@@ -103,8 +106,8 @@ class _Homescreen extends State<Homescreen> {
                                             ? Image.network(
                                                 width: double.infinity,
                                                 product.image!,
-                                                errorBuilder:
-                                                    (context, error, stackTrace) {
+                                                errorBuilder: (context, error,
+                                                    stackTrace) {
                                                   return Image.network(
                                                     'https://via.placeholder.com/150',
                                                   );
@@ -138,8 +141,8 @@ class _Homescreen extends State<Homescreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          cubit.homeModel!.data!.products![index]
-                                              .price!
+                                          cubit.homeModel!.data!
+                                              .products![index].price!
                                               .toString(),
                                         ),
                                         IconButton(
@@ -151,111 +154,123 @@ class _Homescreen extends State<Homescreen> {
                                 ]));
                           }),
                     ),
-                   SizedBox(
-                    height: 10,
-                    
-                   ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(
                       "Discount",
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                       ),
-                      ),
-                
-                     SizedBox(
-                      height: 10.0,
-                     ) ,
-
-                     
+                    ),
                     SizedBox(
-                      
+                      height: 10.0,
+                    ),
+                    SizedBox(
                       height: 230,
                       child: GridView.builder(
-                        
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 1,
-                              mainAxisSpacing: 10,
-                              childAspectRatio: 12 / 9),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1,
+                                  mainAxisSpacing: 10,
+                                  childAspectRatio: 12 / 9),
                           scrollDirection: Axis.horizontal,
                           itemCount: cubit.homeModel!.data!.products!.length,
                           itemBuilder: (context, index) {
+                            var product =
+                                cubit.homeModel!.data!.products![index];
 
-                            var product = cubit.homeModel!.data!.products![index];
-                            
-                            return cubit.homeModel!.data!.products![index].discount! !=0 ? Card(
-                                color: Colors.white,
-                                child: Column(children: [
-                                  Expanded(
-                                    child: Stack(
+                            return Card(
+                                    color: Colors.white,
+                                    child: Column(
                                       children: [
-                                        product.image != null
-                                            ? Image.network(
-                                                width: double.infinity,
-                                                product.image!,
-                                                errorBuilder:
-                                                    (context, error, stackTrace) {
-                                                  return Image.network(
-                                                    'https://via.placeholder.com/150',
-                                                  );
-                                                },
-                                              )
-                                            : Image.network(
-                                                'https://via.placeholder.com/150',
+                                        Expanded(
+                                          child: Stack(
+                                            children: [
+                                              product.image != null
+                                                  ? Image.network(
+                                                      width: double.infinity,
+                                                      product.image!,
+                                                      errorBuilder: (context,
+                                                          error, stackTrace) {
+                                                        return Image.network(
+                                                          'https://via.placeholder.com/150',
+                                                        );
+                                                      },
+                                                    )
+                                                  : Image.network(
+                                                      'https://via.placeholder.com/150',
+                                                    ),
+                                            cubit.homeModel!.data!.products![index]
+                                        .discount! !=
+                                    0
+                                ?   Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: Container(
+                                                    width: 50,
+                                                    height: 30,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "${cubit.homeModel!.data!.products![index].discount!}%",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize:
+                                                                12.0), // Adjust font size
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ): SizedBox(
+                                                
                                               ),
-                                              Container(
-                                                width: 60,
-                                                height: 20,
-                                                decoration: BoxDecoration(
-                                                 color: Colors.red,
-                                                 borderRadius: BorderRadius.circular(15.0),
-                                                ),
-                                                child: Center(
-                                                  child: Text("${cubit.homeModel!.data!.products![index].discount!}%",
-                                                  style: TextStyle(color: Colors.white),
-                                                  
-                                                   ),
-                                                ),
-                                              )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    child: Text(
-                                      cubit.homeModel!.data!.products![index]
-                                          .name!,
-                                      style: TextStyle(
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          cubit.homeModel!.data!.products![index]
-                                              .price!
-                                              .toString(),
+                                            ],
+                                          ),
                                         ),
-                                         
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
+                                          child: Text(
+                                            cubit.homeModel!.data!
+                                                .products![index].name!,
+                                            style: TextStyle(
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                cubit.homeModel!.data!
+                                                    .products![index].price!
+                                                    .toString(),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                ])):SizedBox(
-                                  width: 0.0,
-                                  height: 0.0,
-                                   
-                                );
-                          }),)
+                                  );
+                                 
+                          }),
+                    )
                   ],
                 ),
               ),

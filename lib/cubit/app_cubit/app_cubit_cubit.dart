@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:ecommerce/cubit/app_cubit/app_cubit_state.dart';
 import 'package:ecommerce/model/home-model.dart';
 import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
 import 'package:ecommerce/shared/network/remote/dio_helper/dio_helper.dart';
@@ -7,7 +8,7 @@ import 'package:ecommerce/shared/network/remote/endpoints/endpoints.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-part 'app_cubit_state.dart';
+
 
 class AppCubitCubit extends Cubit<AppCubitState> {
   AppCubitCubit() : super(AppCubitInitial());
@@ -32,4 +33,5 @@ class AppCubitCubit extends Cubit<AppCubitState> {
     }
 
   }
+  
 }
