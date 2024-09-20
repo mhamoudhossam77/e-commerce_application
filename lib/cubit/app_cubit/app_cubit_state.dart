@@ -13,3 +13,9 @@ class  GetHomeDataError extends AppCubitState {}
 class  GetcategoriesDataLoading extends AppCubitState {}
 class  GetcategoriesDataSucess extends AppCubitState {}
 class  GetcategoriesDataError extends AppCubitState {}
+
+
+
+class  GetUserDataLoading extends AppCubitState {}
+class  GetUserDataLSucess extends AppCubitState {}
+class  GetUserDataError extends AppCubitState {}

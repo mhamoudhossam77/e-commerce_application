@@ -1,5 +1,6 @@
 import 'package:ecommerce/screen/Categories_Screen/Categories_Screen.dart';
 import 'package:ecommerce/screen/home-screen/home-screen.dart';
+import 'package:ecommerce/screen/profile_screen/profile_Screen.dart';
 import 'package:flutter/material.dart';
 
 class MainLayout extends StatefulWidget {
@@ -17,7 +18,7 @@ class _MainLayoutState extends State<MainLayout> {
     CategoriesScreen(),
     Scaffold(),
     Scaffold(),
-    Scaffold(),
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
