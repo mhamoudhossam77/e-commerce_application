@@ -1,3 +1,4 @@
+import 'package:ecommerce/screen/home-screen/home-screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -12,12 +13,21 @@ class MainLayout extends StatefulWidget {
 
 class _MainLayoutState extends State<MainLayout> {
   int currentIdx = 0;
+    
+  List<Widget> screens = [
+    Homescreen(),
+       Scaffold(),
+      Scaffold(),
+      Scaffold(),
+      Scaffold(),
+     
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.deepPurple,
+        selectedItemColor: Colors.green,
         onTap: (value) {
           setState(() {
             currentIdx = value;
@@ -57,6 +67,7 @@ class _MainLayoutState extends State<MainLayout> {
           ),
         ],
       ),
+      body: screens[currentIdx],
     );
   }
 }

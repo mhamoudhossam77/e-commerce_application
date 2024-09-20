@@ -1,11 +1,11 @@
 import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
-import 'package:ecommerce/screen/mainlayout/Main_Layout.dart';
+import 'package:ecommerce/screen/mainlayout/Main-Layout.dart';
 import 'package:ecommerce/screen/signup-screen/signup-screen.dart';
-import 'package:ecommerce/shared/network/cache_helper/Cache_Helper.dart';
+import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
 import 'package:ecommerce/widget/login-text-feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
+ 
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -32,13 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Text(
                 "Login",
-                style: GoogleFonts.manrope(
-                  textStyle: TextStyle(
+                style:  
+                    TextStyle(
                     fontSize: 48.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
+             
               SizedBox(
                 height: 20.0,
               ),

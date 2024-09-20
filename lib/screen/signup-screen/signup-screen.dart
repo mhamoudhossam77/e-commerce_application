@@ -1,4 +1,7 @@
 import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
+import 'package:ecommerce/screen/login-screen/login-screen.dart';
+import 'package:ecommerce/screen/mainlayout/Main-Layout.dart';
+import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
 import 'package:ecommerce/widget/signup-text-feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,8 +28,9 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+             
               SizedBox(
-                height: 40.0,
+                height: MediaQuery.of(context).size.height / 6,
               ),
               Text(
                 "Sign Up",
@@ -82,7 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 height: 25.0,
               ),
               BlocConsumer<AuthCubit, AuthState>(
-                listener: (context, state) {
+                listener: (context, state)async {
                   if (state is SignupError) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: Colors.red,
@@ -94,6 +98,10 @@ class _SignupScreenState extends State<SignupScreen> {
                       backgroundColor: Colors.green,
                       content: Text(state.model.message!),
                     ));
+                     await CacheHelper.storeInCache(
+                        "token", state.model.data!.token!);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (_) => MainLayout()));
                   }
                 },
                 builder: (context, state) {
@@ -136,7 +144,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     style: TextStyle(fontSize: 18.0, color: Colors.black),
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                         Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (_) =>  LoginScreen()));
+                      },
                       child: Text(
                         "Login",
                         style: TextStyle(

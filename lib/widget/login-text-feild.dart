@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+ 
 
 class MyTextFormFeild extends StatefulWidget {
   final TextEditingController controller;
@@ -36,12 +36,12 @@ class _MyTextFormFeild extends State<MyTextFormFeild> {
       children: [
         Text(
           widget.title,
-          style: GoogleFonts.manrope(
-            textStyle: const TextStyle(
+          style:  
+             const TextStyle(
               fontSize: 30.0,
               fontWeight: FontWeight.bold,
             ),
-          ),
+         
         ),
         const SizedBox(
           height: 15.0,
