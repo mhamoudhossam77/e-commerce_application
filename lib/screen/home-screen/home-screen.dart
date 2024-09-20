@@ -182,30 +182,30 @@ class _Homescreen extends State<Homescreen> {
                                 cubit.homeModel!.data!.products![index];
 
                             return Card(
-                                    color: Colors.white,
-                                    child: Column(
+                              color: Colors.white,
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: Stack(
                                       children: [
-                                        Expanded(
-                                          child: Stack(
-                                            children: [
-                                              product.image != null
-                                                  ? Image.network(
-                                                      width: double.infinity,
-                                                      product.image!,
-                                                      errorBuilder: (context,
-                                                          error, stackTrace) {
-                                                        return Image.network(
-                                                          'https://via.placeholder.com/150',
-                                                        );
-                                                      },
-                                                    )
-                                                  : Image.network(
-                                                      'https://via.placeholder.com/150',
-                                                    ),
-                                            cubit.homeModel!.data!.products![index]
-                                        .discount! !=
-                                    0
-                                ?   Align(
+                                        product.image != null
+                                            ? Image.network(
+                                                width: double.infinity,
+                                                product.image!,
+                                                errorBuilder: (context, error,
+                                                    stackTrace) {
+                                                  return Image.network(
+                                                    'https://via.placeholder.com/150',
+                                                  );
+                                                },
+                                              )
+                                            : Image.network(
+                                                'https://via.placeholder.com/150',
+                                              ),
+                                        cubit.homeModel!.data!.products![index]
+                                                    .discount! !=
+                                                0
+                                            ? Align(
                                                 alignment: Alignment.topLeft,
                                                 child: Padding(
                                                   padding:
@@ -230,45 +230,43 @@ class _Homescreen extends State<Homescreen> {
                                                     ),
                                                   ),
                                                 ),
-                                              ): SizedBox(
-                                                
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10.0),
-                                          child: Text(
-                                            cubit.homeModel!.data!
-                                                .products![index].name!,
-                                            style: TextStyle(
-                                              fontSize: 12.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                cubit.homeModel!.data!
-                                                    .products![index].price!
-                                                    .toString(),
-                                              ),
-                                            ],
-                                          ),
+                                              )
+                                            : SizedBox(),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: Text(
+                                      cubit.homeModel!.data!.products![index]
+                                          .name!,
+                                      style: TextStyle(
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          cubit.homeModel!.data!
+                                              .products![index].price!
+                                              .toString(),
                                         ),
                                       ],
                                     ),
-                                  );
-                                 
+                                  ),
+                                ],
+                              ),
+                            );
                           }),
                     )
                   ],
