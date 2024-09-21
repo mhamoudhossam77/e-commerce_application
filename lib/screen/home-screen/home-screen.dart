@@ -116,92 +116,6 @@ class _Homescreen extends State<Homescreen> {
                                             : Image.network(
                                                 'https://via.placeholder.com/150',
                                               ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    child: Text(
-                                      cubit.homeModel!.data!.products![index]
-                                          .name!,
-                                      style: TextStyle(
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          cubit.homeModel!.data!
-                                              .products![index].price!
-                                              .toString(),
-                                        ),
-                                        IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(Icons.favorite_outline))
-                                      ],
-                                    ),
-                                  ),
-                                ]));
-                          }),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Discount",
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    SizedBox(
-                      height: 230,
-                      child: GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 1,
-                                  mainAxisSpacing: 10,
-                                  childAspectRatio: 12 / 9),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: cubit.homeModel!.data!.products!.length,
-                          itemBuilder: (context, index) {
-                            var product =
-                                cubit.homeModel!.data!.products![index];
-
-                            return Card(
-                              color: Colors.white,
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: Stack(
-                                      children: [
-                                        product.image != null
-                                            ? Image.network(
-                                                width: double.infinity,
-                                                product.image!,
-                                                errorBuilder: (context, error,
-                                                    stackTrace) {
-                                                  return Image.network(
-                                                    'https://via.placeholder.com/150',
-                                                  );
-                                                },
-                                              )
-                                            : Image.network(
-                                                'https://via.placeholder.com/150',
-                                              ),
                                         cubit.homeModel!.data!.products![index]
                                                     .discount! !=
                                                 0
@@ -261,14 +175,15 @@ class _Homescreen extends State<Homescreen> {
                                               .products![index].price!
                                               .toString(),
                                         ),
+                                        IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(Icons.favorite_outline))
                                       ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            );
+                                ]));
                           }),
-                    )
+                    ),
                   ],
                 ),
               ),
