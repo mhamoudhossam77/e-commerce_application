@@ -24,7 +24,7 @@ class category_model {
 
 class Data {
   int? currentPage;
-  List<Data>? data;
+  List<Categoriesdata>? data;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -53,9 +53,9 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <Categoriesdata>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new Categoriesdata.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];

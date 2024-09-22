@@ -7,3 +7,5 @@ const HOME = "home";
 const CATEGORES = "categories";
 
 const USER = "profile";
+
+const LOGOUT ="logout";

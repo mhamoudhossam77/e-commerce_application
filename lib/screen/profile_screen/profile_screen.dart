@@ -1,6 +1,7 @@
- import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
+import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
 import 'package:ecommerce/cubit/app_cubit/app_cubit_state.dart';
 import 'package:ecommerce/screen/Account_information_screen/Account_information_screen.dart';
+import 'package:ecommerce/screen/login-screen/login-screen.dart';
 import 'package:ecommerce/widget/profile-text-field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,7 +60,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        cubit.userModel!.data!.name ?? 'John Doe', // Fallback for name
+                        cubit.userModel!.data!.name ??
+                            'John Doe', // Fallback for name
                         style: const TextStyle(
                           fontSize: 22.0,
                           fontWeight: FontWeight.bold,
@@ -112,11 +114,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     // Navigate to Help & Support Screen
                   },
                 ),
-                ProfileOption(
-                  icon: Icons.logout,
-                  title: 'Logout',
-                  onTap: () {
-                    // Perform Logout Action
+                BlocConsumer<AppCubitCubit, AppCubitState>(
+                  listener: (context, state) {
+                    if (state is Logoutsucess) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Text("Sucess Logout")));
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is LogoutLoading) {
+                      return Column(
+                        children: [
+                          Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        ],
+                      );
+                    } else if (state is LogoutError) {
+                      return Column(
+                        children: [
+                          Center(
+                            child: Text("Error"),
+                          )
+                        ],
+                      );
+                    } else {
+                      return ProfileOption(
+                        icon: Icons.logout,
+                        title: 'Logout',
+                        onTap: () {
+                          AppCubitCubit.get(context).Logout();
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                          );
+                        },
+                      );
+                    }
                   },
                 ),
               ],

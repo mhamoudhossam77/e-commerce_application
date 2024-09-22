@@ -18,12 +18,12 @@ class AccountInformationScreen extends StatelessWidget {
       ),
       body: BlocConsumer< AppCubitCubit,  AppCubitState>(
         listener: (context, state) {
-          // TODO: implement listener
+           
         },
         builder: (context, state) {
            var cubit = AppCubitCubit.get(context);
 
-          // Show a loading indicator while data is being fetched
+          
           if (state is GetUserDataLoading || cubit.userModel == null) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -45,19 +45,19 @@ class AccountInformationScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
 
-                // Name Field
+                 
                 AccountInfoField(
                   label: 'Full Name',
                   value: cubit.userModel!.data!.name!,
                 ),
 
-                // Email Field
+                 
                 AccountInfoField(
                   label: 'Email',
                   value: cubit.userModel!.data!.email!,
                 ),
 
-                // Phone Number Field
+                
                 AccountInfoField(
                   label: 'Phone Number',
                   value:  cubit.userModel!.data!.phone!,
@@ -68,11 +68,11 @@ class AccountInformationScreen extends StatelessWidget {
 
                 SizedBox(height: 40),
 
-                // Edit Button
+                
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigate to an edit screen or show dialog to edit information
+            
                     },
                     style: ElevatedButton.styleFrom(
                       padding:

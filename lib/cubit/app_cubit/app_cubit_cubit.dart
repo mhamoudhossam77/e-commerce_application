@@ -5,6 +5,7 @@ import 'package:ecommerce/model/categories-model.dart';
 import 'package:ecommerce/model/home-model.dart';
 import 'package:ecommerce/model/user-model.dart';
 import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
+import 'package:ecommerce/shared/network/local/cache-keys/Cache_Keys.dart';
 import 'package:ecommerce/shared/network/remote/dio_helper/dio_helper.dart';
 import 'package:ecommerce/shared/network/remote/endpoints/endpoints.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,20 +13,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppCubitCubit extends Cubit<AppCubitState> {
   AppCubitCubit() : super(AppCubitInitial());
 
-  // Singleton instance getter
+ 
   static AppCubitCubit get(context) => BlocProvider.of(context);
 
-  // Models
+   
   HomeModel? homeModel;
   category_model? categories;
   UserModel? userModel;
 
-  // Get Home Data
+ 
   void getHomeData() async {
     emit(GetHomeDataLoading());
 
     try {
-      // Request data from the endpoint
+       
       Response response = await DioHelper.getRequest(
         endpoint: HOME,
         token: CacheHelper.getStringFromCache("token"),
@@ -44,33 +45,37 @@ class AppCubitCubit extends Cubit<AppCubitState> {
     }
   }
 
-  // Get Categories Data
+
+  
   void getCategoriesData() async {
     emit(GetcategoriesDataLoading());
 
     try {
-      // Request data from the endpoint
+       
       Response response = await DioHelper.getRequest(endpoint: CATEGORES);
 
       categories = category_model.fromJson(response.data);
 
-      // Emit success or error based on the status
-      if (categories?.status == true) {
+     
+      if (categories!.status == true) {
         emit(GetUserDataLSucess());
       } else {
+        print(categories!.message);
         emit(GetcategoriesDataError());
       }
     } catch (error) {
+      print(error);
       emit(GetcategoriesDataError());
     }
   }
 
-  // Get User Data
+   
   void getUserData() async {
     emit(GetUserDataLoading());
 
     try {
-      // Request user data from the endpoint
+      
+     
       Response response = await DioHelper.getRequest(
         endpoint: USER,
         token: CacheHelper.getStringFromCache("token"),
@@ -78,7 +83,8 @@ class AppCubitCubit extends Cubit<AppCubitState> {
 
       userModel = UserModel.fromJson(response.data);
 
-      // Emit success or error based on the status
+
+      
       if (userModel?.status == true) {
         emit(GetUserDataLSucess());
       } else {
@@ -86,6 +92,31 @@ class AppCubitCubit extends Cubit<AppCubitState> {
       }
     } catch (error) {
       emit(GetUserDataError());
+    }
+  }
+
+
+    void Logout() async {
+    emit( LogoutLoading());
+
+    try {
+      print(TOKEN);
+     
+      Response response = await DioHelper.getRequest(
+        endpoint: LOGOUT,
+        token: CacheHelper.getStringFromCache("token"),
+      );
+
+      
+
+ 
+      if (userModel?.status == true) {
+        emit( Logoutsucess());
+      } else {
+        emit(LogoutError());
+      }
+    } catch (error) {
+      emit(LogoutError());
     }
   }
 }

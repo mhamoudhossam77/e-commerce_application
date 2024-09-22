@@ -19,3 +19,7 @@ class  GetcategoriesDataError extends AppCubitState {}
 class  GetUserDataLoading extends AppCubitState {}
 class  GetUserDataLSucess extends AppCubitState {}
 class  GetUserDataError extends AppCubitState {}
+
+class  LogoutLoading extends AppCubitState {}
+class  Logoutsucess extends AppCubitState {}
+class  LogoutError extends AppCubitState {}
