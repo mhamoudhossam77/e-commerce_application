@@ -1,6 +1,6 @@
 class Categories_Detalies {
   bool? status;
-  Null? message;
+  String? message;
   Data? data;
 
   Categories_Detalies({this.status, this.message, this.data});
@@ -92,8 +92,8 @@ class Data {
 
 class Categoriesdata_detalies {
   int? id;
-  double? price;
-  double? oldPrice;
+  num? price;
+  num? oldPrice;
   int? discount;
   String? image;
   String? name;
