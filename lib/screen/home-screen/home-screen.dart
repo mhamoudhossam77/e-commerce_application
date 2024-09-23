@@ -117,7 +117,7 @@ class _Homescreen extends State<Homescreen> {
                           itemBuilder: (context, index) {
                             var product =
                                 cubit.homeModel!.data!.products![index];
-                            return Card(
+                            return  Card(
                                 color: Colors.white,
                                 child: Column(children: [
                                   Expanded(
@@ -137,6 +137,29 @@ class _Homescreen extends State<Homescreen> {
                                             : Image.network(
                                                 'https://via.placeholder.com/150',
                                               ),
+
+                                                cubit.homeModel!.data!.products![index]
+                                        .discount! !=
+                                    0
+                                ?  Container(
+                                              width: 60,
+                                              height: 20,
+                                              decoration: BoxDecoration(
+                                                color: Colors.red,
+                                                borderRadius:
+                                                    BorderRadius.circular(15.0),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "${cubit.homeModel!.data!.products![index].discount!}%",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              ),
+                                            ): SizedBox(
+                                    width: 0.0,
+                                    height: 0.0,
+                                  )
                                       ],
                                     ),
                                   ),
@@ -189,111 +212,7 @@ class _Homescreen extends State<Homescreen> {
                                 ]));
                           }),
                     ),
-                    SizedBox(
-                      height: 40.0,
-                    ),
-                    Text(
-                      "Discount",
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                      height: 230,
-                      child: GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 1,
-                                  mainAxisSpacing: 10,
-                                  childAspectRatio: 12 / 9),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: cubit.homeModel!.data!.products!.length,
-                          itemBuilder: (context, index) {
-                            var product =
-                                cubit.homeModel!.data!.products![index];
-
-                            return cubit.homeModel!.data!.products![index]
-                                        .discount! !=
-                                    0
-                                ? Card(
-                                    color: Colors.white,
-                                    child: Column(children: [
-                                      Expanded(
-                                        child: Stack(
-                                          children: [
-                                            product.image != null
-                                                ? Image.network(
-                                                    width: double.infinity,
-                                                    product.image!,
-                                                    errorBuilder: (context,
-                                                        error, stackTrace) {
-                                                      return Image.network(
-                                                        'https://via.placeholder.com/150',
-                                                      );
-                                                    },
-                                                  )
-                                                : Image.network(
-                                                    'https://via.placeholder.com/150',
-                                                  ),
-                                            Container(
-                                              width: 60,
-                                              height: 20,
-                                              decoration: BoxDecoration(
-                                                color: Colors.red,
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  "${cubit.homeModel!.data!.products![index].discount!}%",
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0),
-                                        child: Text(
-                                          cubit.homeModel!.data!
-                                              .products![index].name!,
-                                          style: TextStyle(
-                                            fontSize: 12.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              cubit.homeModel!.data!
-                                                  .products![index].price!
-                                                  .toString(),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ]))
-                                : SizedBox(
-                                    width: 0.0,
-                                    height: 0.0,
-                                  );
-                          }),
-                    )
+                     
                   ],
                 ),
               ),

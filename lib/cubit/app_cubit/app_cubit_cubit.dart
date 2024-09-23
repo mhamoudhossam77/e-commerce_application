@@ -124,7 +124,7 @@ class AppCubitCubit extends Cubit<AppCubitState> {
 
       categories_detalies = Categories_Detalies.fromJson(response.data);
 
-      if (userModel?.status == true) {
+      if (categories_detalies?.status == true) {
         emit(GetCategoriesDetailesSucess());
       } else {
         emit(GetCategoriesDetailesError());
@@ -154,16 +154,16 @@ class AppCubitCubit extends Cubit<AppCubitState> {
   }
 
   void getallfavourit() async {
-    emit(GetCategoriesDetailesLoading());
+    emit(GetFavouritesLoading());
     Response r = await DioHelper.getRequest(
-      endpoint: "FAVOURITES",
+      endpoint:  "favorites",
       token: CacheHelper.getStringFromCache("token"),
     );
-    FavouriteModel m = FavouriteModel.fromJson(r.data);
-    if (m.status!) {
-      emit(GetCategoriesDetailesSucess());
+    favouriteModel  = FavouriteModel.fromJson(r.data);
+    if (favouriteModel!.status!) {
+      emit(GetFavouritesSuccess());
     } else {
-      emit(GetCategoriesDetailesError());
+      emit( GetFavouritesError());
     }
   }
 }
