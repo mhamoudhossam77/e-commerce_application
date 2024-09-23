@@ -23,3 +23,8 @@ class  GetUserDataError extends AppCubitState {}
 class  LogoutLoading extends AppCubitState {}
 class  Logoutsucess extends AppCubitState {}
 class  LogoutError extends AppCubitState {}
+
+
+class  GetCategoriesDetailesLoading extends AppCubitState {}
+class  GetCategoriesDetailesSucess extends AppCubitState {}
+class  GetCategoriesDetailesError extends AppCubitState {}

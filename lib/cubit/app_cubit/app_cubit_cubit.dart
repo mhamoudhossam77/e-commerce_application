@@ -1,6 +1,7 @@
- import 'package:bloc/bloc.dart';
+import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:ecommerce/cubit/app_cubit/app_cubit_state.dart';
+import 'package:ecommerce/model/categories-detaiels-model.dart';
 import 'package:ecommerce/model/categories-model.dart';
 import 'package:ecommerce/model/home-model.dart';
 import 'package:ecommerce/model/user-model.dart';
@@ -13,20 +14,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppCubitCubit extends Cubit<AppCubitState> {
   AppCubitCubit() : super(AppCubitInitial());
 
- 
   static AppCubitCubit get(context) => BlocProvider.of(context);
 
-   
   HomeModel? homeModel;
   category_model? categories;
   UserModel? userModel;
+  Categories_Detalies? categories_detalies;
 
- 
   void getHomeData() async {
     emit(GetHomeDataLoading());
 
     try {
-       
       Response response = await DioHelper.getRequest(
         endpoint: HOME,
         token: CacheHelper.getStringFromCache("token"),
@@ -41,22 +39,19 @@ class AppCubitCubit extends Cubit<AppCubitState> {
         emit(GetHomeDataError());
       }
     } catch (error) {
-      emit(GetHomeDataError( ));
+      emit(GetHomeDataError());
     }
   }
 
-
-  
   void getCategoriesData() async {
+    print(CacheHelper.getStringFromCache("token"));
     emit(GetcategoriesDataLoading());
 
     try {
-       
       Response response = await DioHelper.getRequest(endpoint: CATEGORES);
 
       categories = category_model.fromJson(response.data);
 
-     
       if (categories!.status == true) {
         emit(GetUserDataLSucess());
       } else {
@@ -69,13 +64,10 @@ class AppCubitCubit extends Cubit<AppCubitState> {
     }
   }
 
-   
   void getUserData() async {
     emit(GetUserDataLoading());
 
     try {
-      
-     
       Response response = await DioHelper.getRequest(
         endpoint: USER,
         token: CacheHelper.getStringFromCache("token"),
@@ -83,8 +75,6 @@ class AppCubitCubit extends Cubit<AppCubitState> {
 
       userModel = UserModel.fromJson(response.data);
 
-
-      
       if (userModel?.status == true) {
         emit(GetUserDataLSucess());
       } else {
@@ -95,28 +85,45 @@ class AppCubitCubit extends Cubit<AppCubitState> {
     }
   }
 
-
-    void Logout() async {
-    emit( LogoutLoading());
+  void Logout() async {
+    emit(LogoutLoading());
 
     try {
       print(TOKEN);
-     
+
       Response response = await DioHelper.getRequest(
         endpoint: LOGOUT,
         token: CacheHelper.getStringFromCache("token"),
       );
 
-      
-
- 
       if (userModel?.status == true) {
-        emit( Logoutsucess());
+        emit(Logoutsucess());
       } else {
         emit(LogoutError());
       }
     } catch (error) {
       emit(LogoutError());
+    }
+  }
+
+  void getCategoriesDetalies() async {
+    emit(GetCategoriesDetailesLoading());
+
+    try {
+      Response response = await DioHelper.getRequest(
+        endpoint: CATEGORES_Detalies,
+        token: CacheHelper.getStringFromCache("token"),
+      );
+
+      categories_detalies = Categories_Detalies.fromJson(response.data);
+
+      if (userModel?.status == true) {
+        emit(GetCategoriesDetailesSucess());
+      } else {
+        emit(GetCategoriesDetailesError());
+      }
+    } catch (error) {
+      emit(GetCategoriesDetailesError());
     }
   }
 }
