@@ -153,7 +153,7 @@ class AppCubitCubit extends Cubit<AppCubitState> {
     }
   }
 
-  void getallfavourit() async {
+  void getallfavourit() async { 
     emit(GetFavouritesLoading());
     Response r = await DioHelper.getRequest(
       endpoint:  "favorites",
