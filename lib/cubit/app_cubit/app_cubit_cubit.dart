@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:ecommerce/cubit/app_cubit/app_cubit_state.dart';
+import 'package:ecommerce/model/Favourit_Model.dart';
 import 'package:ecommerce/model/categories-detaiels-model.dart';
 import 'package:ecommerce/model/categories-model.dart';
 import 'package:ecommerce/model/home-model.dart';
@@ -9,6 +10,7 @@ import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
 import 'package:ecommerce/shared/network/local/cache-keys/Cache_Keys.dart';
 import 'package:ecommerce/shared/network/remote/dio_helper/dio_helper.dart';
 import 'package:ecommerce/shared/network/remote/endpoints/endpoints.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppCubitCubit extends Cubit<AppCubitState> {
@@ -20,6 +22,8 @@ class AppCubitCubit extends Cubit<AppCubitState> {
   category_model? categories;
   UserModel? userModel;
   Categories_Detalies? categories_detalies;
+  Map<int, bool> favmap = {};
+  FavouriteModel? favouriteModel;
 
   void getHomeData() async {
     emit(GetHomeDataLoading());
@@ -31,9 +35,12 @@ class AppCubitCubit extends Cubit<AppCubitState> {
       );
 
       homeModel = HomeModel.fromJson(response.data);
-
-      // Emit success or error based on the status
       if (homeModel?.status == true) {
+        for (var Element in homeModel!.data!.products!) {
+          favmap.addAll({
+            Element.id!: Element.inFavorites!,
+          });
+        }
         emit(GetHomeDataSucess());
       } else {
         emit(GetHomeDataError());
@@ -123,6 +130,39 @@ class AppCubitCubit extends Cubit<AppCubitState> {
         emit(GetCategoriesDetailesError());
       }
     } catch (error) {
+      emit(GetCategoriesDetailesError());
+    }
+  }
+
+  void ChangeProductFavourit({required int Id}) async {
+    favmap[Id] = !favmap[Id]!;
+    emit(ChangeProductFavouriteSuccessfully());
+    Response res = await DioHelper.postRequest(
+        endpoint: FAVOURITES,
+        token: CacheHelper.getStringFromCache("token"),
+        data: {
+          "product_id": Id,
+        });
+    print(CacheHelper.getStringFromCache("token"));
+    print(res.data);
+    if (res.data["status"]) {
+      emit(ChangeProductFavouriteSuccessfully());
+    } else {
+      favmap[Id] = !favmap[Id]!;
+      emit(ChangeProductFavouriteError());
+    }
+  }
+
+  void getallfavourit() async {
+    emit(GetCategoriesDetailesLoading());
+    Response r = await DioHelper.getRequest(
+      endpoint: "FAVOURITES",
+      token: CacheHelper.getStringFromCache("token"),
+    );
+    FavouriteModel m = FavouriteModel.fromJson(r.data);
+    if (m.status!) {
+      emit(GetCategoriesDetailesSucess());
+    } else {
       emit(GetCategoriesDetailesError());
     }
   }
