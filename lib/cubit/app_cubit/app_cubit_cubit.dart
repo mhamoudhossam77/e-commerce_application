@@ -138,7 +138,7 @@ class AppCubitCubit extends Cubit<AppCubitState> {
     favmap[Id] = !favmap[Id]!;
     emit(ChangeProductFavouriteSuccessfully());
     Response res = await DioHelper.postRequest(
-        endpoint: FAVOURITES,
+        endpoint: "FAVOURITES",
         token: CacheHelper.getStringFromCache("token"),
         data: {
           "product_id": Id,
@@ -154,7 +154,7 @@ class AppCubitCubit extends Cubit<AppCubitState> {
   }
 
   void getallfavourit() async {
-    emit(GetCategoriesDetailesLoading());
+    emit(GetFavouritesLoading());
     Response r = await DioHelper.getRequest(
       endpoint: "FAVOURITES",
       token: CacheHelper.getStringFromCache("token"),
