@@ -28,3 +28,10 @@ class  LogoutError extends AppCubitState {}
 class  GetCategoriesDetailesLoading extends AppCubitState {}
 class  GetCategoriesDetailesSucess extends AppCubitState {}
 class  GetCategoriesDetailesError extends AppCubitState {}
+
+class ChangeProductFavouriteSuccessfully extends AppCubitState{}
+class ChangeProductFavouriteError extends AppCubitState{}
+
+class GetFavouritesLoading extends AppCubitState{}
+class GetFavouritesSuccess extends AppCubitState{}
+class GetFavouritesError extends AppCubitState{}

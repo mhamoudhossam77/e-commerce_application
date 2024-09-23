@@ -1,4 +1,5 @@
 import 'package:ecommerce/screen/Categories_Screen/Categories_Screen.dart';
+import 'package:ecommerce/screen/Favourit_Screen/favourit_screen.dart';
 import 'package:ecommerce/screen/home-screen/home-screen.dart';
 import 'package:ecommerce/screen/profile_screen/profile_Screen.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _MainLayoutState extends State<MainLayout> {
     Homescreen(),
     CategoriesScreen(),
     Scaffold(),
-    Scaffold(),
+    FavouriteScreen(),
     ProfileScreen(),
   ];
   @override

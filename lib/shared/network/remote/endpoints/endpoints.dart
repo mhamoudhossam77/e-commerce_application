@@ -10,4 +10,4 @@ const USER = "profile";
 
 const LOGOUT ="logout";
 
-const CATEGORES_Detalies ="categories/44";
+const CATEGORES_Detalies ="categories";

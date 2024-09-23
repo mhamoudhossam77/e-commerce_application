@@ -25,7 +25,28 @@ class _Homescreen extends State<Homescreen> {
     return SafeArea(
       child: Scaffold(
           body: BlocConsumer<AppCubitCubit, AppCubitState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is ChangeProductFavouriteSuccessfully) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                backgroundColor: Colors.green,
+                content: Text(
+                  "Successfully",
+                ),
+              ),
+            );
+          }
+          if (state is ChangeProductFavouriteError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                backgroundColor: Colors.red,
+                content: Text(
+                  "Error",
+                ),
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           var cubit = AppCubitCubit.get(context);
           if (state is GetHomeDataLoading) {
@@ -80,8 +101,6 @@ class _Homescreen extends State<Homescreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
-                   
                     SizedBox(
                       height: 35.0,
                     ),
@@ -148,19 +167,32 @@ class _Homescreen extends State<Homescreen> {
                                               .toString(),
                                         ),
                                         IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(Icons.favorite_outline))
+                                          onPressed: () {
+                                            cubit.ChangeProductFavourit(
+                                                Id: cubit.homeModel!.data!
+                                                    .products![index].id!);
+                                          },
+                                          icon: Icon(
+                                            cubit.favmap[cubit.homeModel!.data!
+                                                    .products![index].id]!
+                                                ? Icons.favorite_border_outlined
+                                                : Icons.favorite_outline,
+                                            color: cubit.favmap[cubit.homeModel!
+                                                    .data!.products![index].id]!
+                                                ? Colors.red
+                                                : Colors.black,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
                                 ]));
                           }),
                     ),
-                      
-                     SizedBox(
+                    SizedBox(
                       height: 40.0,
                     ),
-                     Text(
+                    Text(
                       "Discount",
                       style: TextStyle(
                         fontSize: 24.0,
