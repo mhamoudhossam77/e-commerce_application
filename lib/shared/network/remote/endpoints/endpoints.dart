@@ -12,4 +12,5 @@ const LOGOUT ="logout";
 
 const CATEGORES_Detalies ="categories/44";
 
-const FAVOURITES = "favorites";
+
+
