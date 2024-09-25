@@ -34,8 +34,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_launcher_icons: ^0.14.1
   google_fonts: ^6.2.1
   shared_preferences: ^2.3.2
+  smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
 

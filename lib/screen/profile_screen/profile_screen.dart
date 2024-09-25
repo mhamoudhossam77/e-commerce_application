@@ -1,4 +1,4 @@
-import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
+ import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
 import 'package:ecommerce/cubit/app_cubit/app_cubit_state.dart';
 import 'package:ecommerce/screen/Account_information_screen/Account_information_screen.dart';
 import 'package:ecommerce/screen/login-screen/login-screen.dart';
@@ -17,61 +17,77 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    // Fetch user data when the screen initializes
+   
     AppCubitCubit.get(context).getUserData();
   }
 
   @override
   Widget build(BuildContext context) {
+    
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
-        backgroundColor: Colors.green,
+        backgroundColor:  Colors.yellow[700],
       ),
       body: BlocConsumer<AppCubitCubit, AppCubitState>(
         listener: (context, state) {
-          // Handle any side-effects if needed
+           
+          if (state is UpdateUserDataSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Profile updated successfully!'),
+              backgroundColor: Colors.green,
+            ));
+          } else if (state is UpdateUserDataError) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Error updating profile!'),
+              backgroundColor: Colors.red,
+            ));
+          }
         },
         builder: (context, state) {
           var cubit = AppCubitCubit.get(context);
-
-          // Show a loading indicator while data is being fetched
+ 
           if (state is GetUserDataLoading || cubit.userModel == null) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          // Once data is fetched, display the profile details
+           
           return SingleChildScrollView(
             child: Column(
               children: [
-                // Profile Picture and Name
+                 
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  padding: EdgeInsets.symmetric(
+                    vertical: screenHeight * 0.02,  
+                  ),
                   child: Column(
                     children: [
                       CircleAvatar(
-                        radius: 50.0,
-                        backgroundImage: cubit.userModel!.data!.image != null
-                            ? NetworkImage(cubit.userModel!.data!.image!)
+                        radius: screenWidth * 0.13,  
+                        backgroundImage: cubit.userModel?.data?.image != null
+                            ? NetworkImage(cubit.userModel?.data?.image ?? '')
                             : const AssetImage('assets/default_profile.png')
-                                as ImageProvider, // Default image
+                                as ImageProvider,  
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: screenHeight * 0.02),
                       Text(
-                        cubit.userModel!.data!.name ??
-                            'John Doe', // Fallback for name
-                        style: const TextStyle(
-                          fontSize: 22.0,
+                        cubit.userModel?.data?.name ?? 'John Doe',  
+                        style: TextStyle(
+                          fontSize: screenWidth * 0.06,  
                           fontWeight: FontWeight.bold,
+                          color: Colors.yellow[700],  
                         ),
                       ),
-                      const SizedBox(height: 5),
+                      SizedBox(height: screenHeight * 0.01),
                       Text(
-                        cubit.userModel!.data!.email ?? 'No email available',
+                        cubit.userModel?.data?.email ?? 'No email available',
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: screenWidth * 0.045,
                           color: Colors.grey[700],
                         ),
                       ),
@@ -79,8 +95,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
 
-                // Profile Options
-                const SizedBox(height: 20),
+               
+                SizedBox(height: screenHeight * 0.03),
                 ProfileOption(
                   icon: Icons.person,
                   title: 'Account Information',
@@ -88,56 +104,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const AccountInformationScreen(),
+                        builder: (_) => const EditProfileScreen(),
                       ),
                     );
                   },
+                  highlightColor: Colors.yellow[700],  
                 ),
                 ProfileOption(
                   icon: Icons.settings,
                   title: 'Settings',
                   onTap: () {
-                    // Navigate to Settings Screen
+                     
                   },
+                  highlightColor: Colors.yellow[700],  
                 ),
                 ProfileOption(
                   icon: Icons.security,
                   title: 'Privacy',
                   onTap: () {
-                    // Navigate to Privacy Screen
+                   
                   },
+                  highlightColor: Colors.yellow[700],  
                 ),
                 ProfileOption(
                   icon: Icons.help,
                   title: 'Help & Support',
                   onTap: () {
-                    // Navigate to Help & Support Screen
+                  
                   },
+                  highlightColor: Colors.yellow[700],  
                 ),
                 BlocConsumer<AppCubitCubit, AppCubitState>(
                   listener: (context, state) {
                     if (state is Logoutsucess) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: Colors.green,
-                          content: Text("Sucess Logout")));
+                          content: const Text("Success Logout")));
                     }
                   },
                   builder: (context, state) {
                     if (state is LogoutLoading) {
-                      return Column(
-                        children: [
-                          Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        ],
+                      return const Center(
+                        child: CircularProgressIndicator(),
                       );
                     } else if (state is LogoutError) {
-                      return Column(
-                        children: [
-                          Center(
-                            child: Text("Error"),
-                          )
-                        ],
+                      return const Center(
+                        child: Text("Error"),
                       );
                     } else {
                       return ProfileOption(
@@ -147,9 +159,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           AppCubitCubit.get(context).Logout();
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
+                                builder: (context) => const LoginScreen()),
                           );
                         },
+                        highlightColor: Colors.red, 
                       );
                     }
                   },

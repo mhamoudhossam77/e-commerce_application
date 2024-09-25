@@ -1,3 +1,4 @@
+ import 'package:ecommerce/screen/Cart_Screen/cart_screen.dart';
 import 'package:ecommerce/screen/Categories_Screen/Categories_Screen.dart';
 import 'package:ecommerce/screen/Favourit_Screen/favourit_screen.dart';
 import 'package:ecommerce/screen/home-screen/home-screen.dart';
@@ -17,16 +18,17 @@ class _MainLayoutState extends State<MainLayout> {
   List<Widget> screens = [
     Homescreen(),
     CategoriesScreen(),
-    Scaffold(),
+    CartScreen(),
     FavouriteScreen(),
     ProfileScreen(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.green,
+        selectedItemColor: Colors.yellow[700],  
         onTap: (value) {
           setState(() {
             currentIdx = value;

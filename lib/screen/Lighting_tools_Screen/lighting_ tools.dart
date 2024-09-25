@@ -2,53 +2,52 @@ import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
 import 'package:ecommerce/cubit/app_cubit/app_cubit_state.dart';
 import 'package:ecommerce/widget/ElectronicDeviceCard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ElectronicDevicesScreen extends StatefulWidget {
-  const ElectronicDevicesScreen({super.key});
+class Lightingtools extends StatefulWidget {
+  const Lightingtools({super.key});
 
   @override
-  State<ElectronicDevicesScreen> createState() =>
-      _ElectronicDevicesScreenState();
+  State<Lightingtools> createState() => _LightingtoolsState();
 }
 
-class _ElectronicDevicesScreenState extends State<ElectronicDevicesScreen> {
+class _LightingtoolsState extends State<Lightingtools> {
   @override
-  void initState() {
-    super.initState();
-    AppCubitCubit.get(context).getCategoryElectronicDevice();
-  }
 
-  @override
+   void initState() {
+    super.initState();
+    AppCubitCubit.get(context).getCategoryLightingtools();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Electronic Devices',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),  
-        ),
-        backgroundColor:  Colors.yellow[700],  
+        backgroundColor: Colors.yellow[700],
+        title: const Text('Lighting tools' , style: TextStyle(fontWeight: FontWeight.bold),),
       ),
-      body: BlocConsumer<AppCubitCubit, AppCubitState>(
+      body:   BlocConsumer<AppCubitCubit, AppCubitState>(
         listener: (context, state) {
-          if (state is GetcategoriesDataError) {
-            ScaffoldMessenger.of(context).showSnackBar(
+           if(state is GetcategoriesDataError){
+             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: Colors.red,
-                content: const Text("Error"),
+                content: 
+              Text("Error")
               ),
             );
-          }
+           }
         },
         builder: (context, state) {
           var cubit = AppCubitCubit.get(context);
 
+           
           if (cubit.categories_detalies?.data?.data == null) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(),   
             );
           }
 
+          
           return GridView.builder(
             padding: const EdgeInsets.all(10),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -64,6 +63,7 @@ class _ElectronicDevicesScreenState extends State<ElectronicDevicesScreen> {
                 name: device.name ?? 'Unknown Device',
                 imageUrl: device.image ?? 'https://example.com/placeholder.png',
                 price: device.price?.toString() ?? '0',
+                
               );
             },
           );

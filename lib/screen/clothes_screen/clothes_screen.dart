@@ -4,51 +4,48 @@ import 'package:ecommerce/widget/ElectronicDeviceCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ElectronicDevicesScreen extends StatefulWidget {
-  const ElectronicDevicesScreen({super.key});
+class ClothesScreen extends StatefulWidget {
+  const ClothesScreen({super.key});
 
   @override
-  State<ElectronicDevicesScreen> createState() =>
-      _ElectronicDevicesScreenState();
+  State<ClothesScreen> createState() => _ClothesScreenState();
 }
 
-class _ElectronicDevicesScreenState extends State<ElectronicDevicesScreen> {
+class _ClothesScreenState extends State<ClothesScreen> {
   @override
-  void initState() {
+   void initState() {
     super.initState();
-    AppCubitCubit.get(context).getCategoryElectronicDevice();
+    AppCubitCubit.get(context).getCategoryClothes();
   }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Electronic Devices',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),  
-        ),
-        backgroundColor:  Colors.yellow[700],  
+        backgroundColor: Colors.yellow[700],
+        title: const Text('Clothes' , style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: BlocConsumer<AppCubitCubit, AppCubitState>(
         listener: (context, state) {
-          if (state is GetcategoriesDataError) {
-            ScaffoldMessenger.of(context).showSnackBar(
+           if(state is GetcategoriesDataError){
+             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: Colors.red,
-                content: const Text("Error"),
+                content: 
+              Text("Error")
               ),
             );
-          }
+           }
         },
         builder: (context, state) {
           var cubit = AppCubitCubit.get(context);
 
+           
           if (cubit.categories_detalies?.data?.data == null) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(),   
             );
           }
 
+          
           return GridView.builder(
             padding: const EdgeInsets.all(10),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -64,6 +61,7 @@ class _ElectronicDevicesScreenState extends State<ElectronicDevicesScreen> {
                 name: device.name ?? 'Unknown Device',
                 imageUrl: device.image ?? 'https://example.com/placeholder.png',
                 price: device.price?.toString() ?? '0',
+                
               );
             },
           );

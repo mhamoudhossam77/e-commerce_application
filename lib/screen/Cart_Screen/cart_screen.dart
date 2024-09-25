@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FavouriteScreen extends StatefulWidget {
-  const FavouriteScreen({Key? key}) : super(key: key);
+class CartScreen extends StatefulWidget {
+  const CartScreen({Key? key}) : super(key: key);
 
   @override
-  State<FavouriteScreen> createState() => _FavouriteScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _FavouriteScreenState extends State<FavouriteScreen> {
+class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
-    AppCubitCubit.get(context).getallfavourit();
+    AppCubitCubit.get(context).getallCarts();
   }
 
   @override
@@ -24,11 +24,11 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = AppCubitCubit.get(context);
-        if (state is GetFavouritesLoading || cubit.favouriteModel == null) {
+        if (state is GetCartLoading || cubit.cartModel == null) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state is GetFavouritesError) {
+        } else if (state is GetCartError) {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +38,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    AppCubitCubit.get(context).getallfavourit();
+                    AppCubitCubit.get(context).getallCarts();
                   },
                   child: const Text(
                     "Reload",
@@ -57,7 +57,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: Image.network(cubit.favouriteModel!.data!.favouriteData![index].product!.image!),
+                        child: Image.network(cubit.cartModel!.data!.cartItems![index].product!.image!),
                       ),
                       Expanded(
                         flex: 2,
@@ -66,17 +66,17 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              cubit.favouriteModel!.data!.favouriteData![index].product!.name!,
+                              cubit.cartModel!.data!.cartItems![index].product!.name!,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontSize: 17.0,
                                 fontWeight: FontWeight.bold,
-                                color:  Colors.black,  
+                                color:  Colors.black, 
                               ),
                             ),
                             Text(
-                              cubit.favouriteModel!.data!.favouriteData![index].product!.description!,
+                              cubit.cartModel!.data!.cartItems![index].product!.description!,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -84,8 +84,11 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            SizedBox(
+                              height: 5,
+                            ),
                             Text(
-                              "${cubit.favouriteModel!.data!.favouriteData![index].product!.price.toString()} EGP",
+                              "${cubit.cartModel!.data!.cartItems![index].product!.price!.toString()} EGP",
                               maxLines: 1,
                               style: TextStyle(
                                 fontSize: 17.0,
@@ -100,7 +103,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color: Colors.yellow[700],  
+                              color: Colors.yellow[700], 
                               borderRadius: BorderRadius.circular(25.0),
                             ),
                             child: Padding(
@@ -110,7 +113,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                               ),
                               child: Center(
                                 child: Text(
-                                  "${cubit.favouriteModel!.data!.favouriteData![index].product!.discount!.toString()}%",
+                                  "${cubit.cartModel!.data!.cartItems![index].product!.discount!.toString()}%",
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -119,28 +122,13 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                               ),
                             ),
                           ),
-                          IconButton(
-                            onPressed: () {
-                              cubit.changeProductFavourite(
-                                id: cubit.favouriteModel!.data!.favouriteData![index].product!.id!,
-                              );
-                            },
-                            icon: Icon(
-                              cubit.favmap[cubit.favouriteModel!.data!.favouriteData![index].product!.id]!
-                                  ? Icons.favorite_outlined
-                                  : Icons.favorite_outline,
-                              color: cubit.favmap[cubit.favouriteModel!.data!.favouriteData![index].product!.id]!
-                                  ? Colors.red
-                                  : Colors.grey,
-                            ),
-                          ),
                         ],
                       ),
                     ],
                   ),
                 );
               },
-              itemCount: cubit.favouriteModel!.data!.favouriteData!.length,
+              itemCount: cubit.cartModel!.data!.cartItems!.length,
             ),
           );
         }
