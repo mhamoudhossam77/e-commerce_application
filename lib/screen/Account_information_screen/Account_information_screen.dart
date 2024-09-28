@@ -1,97 +1,130 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
 import 'package:ecommerce/cubit/app_cubit/app_cubit_state.dart';
-import 'package:ecommerce/widget/AccountInfoField.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AccountInformationScreen extends StatelessWidget {
-  const AccountInformationScreen({super.key});
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  _EditProfileScreenState createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+ 
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    var cubit = AppCubitCubit.get(context);
+ 
+    nameController.text = cubit.userModel?.data?.name ?? '';
+    emailController.text = cubit.userModel?.data?.email ?? '';
+    phoneController.text = cubit.userModel?.data?.phone ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Account Information'),
-        backgroundColor: Colors.blue,
+        backgroundColor:Colors.yellow[700] ,
+        title: Text('Edit Profile'),
       ),
-      body: BlocConsumer< AppCubitCubit,  AppCubitState>(
+      body: BlocConsumer<AppCubitCubit, AppCubitState>(
         listener: (context, state) {
+          if (state is UpdateUserDataSuccess) {
+            
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Profile updated successfully!'),
+              backgroundColor: Colors.green,
+            ));
+            Navigator.pop(context);  
+          } else if (state is UpdateUserDataError) {
            
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Error updating profile!'),
+              backgroundColor: Colors.red,
+            ));
+          }
         },
         builder: (context, state) {
-           var cubit = AppCubitCubit.get(context);
-
-          
-          if (state is GetUserDataLoading || cubit.userModel == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+          var cubit = AppCubitCubit.get(context);
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 20),
-                Text(
-                  'Personal Information',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                 
-                AccountInfoField(
-                  label: 'Full Name',
-                  value: cubit.userModel!.data!.name!,
-                ),
-
-                 
-                AccountInfoField(
-                  label: 'Email',
-                  value: cubit.userModel!.data!.email!,
-                ),
-
-                
-                AccountInfoField(
-                  label: 'Phone Number',
-                  value:  cubit.userModel!.data!.phone!,
-                ),
-
-                
-             
-
-                SizedBox(height: 40),
-
-                
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-            
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      labelText: 'Full Name',
+                      labelStyle: TextStyle(color: Colors.yellow[700]), 
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your name';
+                      }
+                      return null;
                     },
-                    style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    child: Text(
-                      'Edit Information',
-                      style: TextStyle(fontSize: 16),
-                    ),
                   ),
-                ),
-              ],
+                  TextFormField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      labelStyle: TextStyle(color: Colors.yellow[700]),  
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    controller: phoneController,
+                    decoration: InputDecoration(
+                      labelText: 'Phone Number',
+                      labelStyle: TextStyle(color: Colors.yellow[700]), // Highlight label
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your phone number';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 20),
+                  state is UpdateUserDataLoading
+                      ? CircularProgressIndicator()  
+                      : ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              
+                              cubit.updateUserData(
+                                name: nameController.text,
+                                email: emailController.text,
+                                phone: phoneController.text,
+                              );
+                            }
+                          },
+                          child: Text('Save'),
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.yellow[700]),  
+                        ),
+                ],
+              ),
             ),
           );
         },
       ),
     );
   }
+
+ 
 }

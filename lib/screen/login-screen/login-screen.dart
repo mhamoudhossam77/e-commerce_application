@@ -1,11 +1,10 @@
-import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
+ import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
 import 'package:ecommerce/screen/mainlayout/Main-Layout.dart';
 import 'package:ecommerce/screen/signup-screen/signup-screen.dart';
 import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
 import 'package:ecommerce/widget/login-text-feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
- 
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,10 +16,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor:  Colors.red,  
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
@@ -30,33 +30,36 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 6,
               ),
+               
+              const SizedBox(
+                height: 20.0,
+              ),
               Text(
                 "Login",
-                style:  
-                    TextStyle(
-                    fontSize: 48.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                style: TextStyle(
+                  fontSize: 48.0,
+                  fontWeight: FontWeight.bold,
+                  color:  Colors.white,  
                 ),
-             
-              SizedBox(
+              ),
+              const SizedBox(
                 height: 20.0,
               ),
               MyTextFormFeild(
                 controller: _emailController,
-                title: "E-mail",
-                labelText: "E-mail",
+                title: "email",
+                labelText: "Enter your email",  
                 prefixIcon: const Icon(
                   Icons.email_outlined,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               MyTextFormFeild(
                 controller: _passwordController,
-                title: "Password",
-                labelText: "Password",
+                title: "password",
+                labelText: "Enter your password", 
                 prefixIcon: const Icon(
                   Icons.lock_outline,
                 ),
@@ -101,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.black,  
                       minimumSize: const Size(
                         double.infinity,
                         55.0,
@@ -116,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text(
                       "Login",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,  
                         fontSize: 18.0,
                       ),
                     ),
@@ -126,7 +129,10 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account?"),
+                  const Text(
+                    "Don't have an account?",
+                    style: TextStyle(color: Colors.black),  
+                  ),
                   TextButton(
                     onPressed: () {
                       Navigator.pushReplacement(
@@ -138,6 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: const Text(
                       "Signup",
+                      style: TextStyle(color: Colors.blue),  
                     ),
                   ),
                 ],

@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
- 
+ import 'package:flutter/material.dart';
 
 class MyTextFormFeild extends StatefulWidget {
   final TextEditingController controller;
-  final String title;
   final String labelText;
   final Icon prefixIcon;
   final bool isPassword;
@@ -11,18 +9,18 @@ class MyTextFormFeild extends StatefulWidget {
   const MyTextFormFeild({
     Key? key,
     required this.controller,
-    required this.title,
     required this.labelText,
     required this.prefixIcon,
-    this.isPassword = false,
+    this.isPassword = false, required String title,
   }) : super(key: key);
 
   @override
-  State<MyTextFormFeild> createState() => _MyTextFormFeild();
+  State<MyTextFormFeild> createState() => _MyTextFormFeildState();
 }
 
-class _MyTextFormFeild extends State<MyTextFormFeild> {
+class _MyTextFormFeildState extends State<MyTextFormFeild> {
   bool isObsecure = false;
+
   @override
   void initState() {
     super.initState();
@@ -31,48 +29,37 @@ class _MyTextFormFeild extends State<MyTextFormFeild> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          widget.title,
-          style:  
-             const TextStyle(
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-            ),
-         
+    return TextFormField(
+      controller: widget.controller,
+      obscureText: isObsecure,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),  
+          borderSide: const BorderSide(
+            width: 1,
+            color: Colors.black,
+          ),
         ),
-        const SizedBox(
-          height: 15.0,
+        labelText: widget.labelText,
+        labelStyle: const TextStyle(
+          color: Colors.black, 
         ),
-        TextFormField(
-          controller: widget.controller,
-          obscureText: isObsecure,
-          decoration: InputDecoration(
-              border: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  width: 1,
-                  color: Colors.black,
+        prefixIcon: widget.prefixIcon,
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    isObsecure = !isObsecure;
+                  });
+                },
+                icon: Icon(
+                  isObsecure
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
                 ),
-              ),
-              labelText: widget.labelText,
-              prefixIcon: widget.prefixIcon,
-              suffixIcon: widget.isPassword
-                  ? IconButton(
-                      onPressed: () {
-                        SetState() {
-                          isObsecure = !isObsecure;
-                        }
-                      },
-                      icon: Icon(
-                        isObsecure
-                            ? Icons.visibility_off_outlined
-                            : Icons.visibility_off_outlined,
-                      ))
-                  : null),
-        ),
-      ],
+              )
+            : null,
+      ),
     );
   }
 }

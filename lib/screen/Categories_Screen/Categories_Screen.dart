@@ -1,9 +1,14 @@
 import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
 import 'package:ecommerce/cubit/app_cubit/app_cubit_state.dart';
+import 'package:ecommerce/screen/Fighting_Corona_Screen/Fighting_Corona.dart';
+import 'package:ecommerce/screen/Groceries_Screen/Groceries_Screen.dart';
+import 'package:ecommerce/screen/Lighting_tools_Screen/lighting_%20tools.dart';
+import 'package:ecommerce/screen/clothes_screen/clothes_screen.dart';
 import 'package:ecommerce/screen/electronic_devices_screen/Electronic_Devices_Screen.dart';
+import 'package:ecommerce/screen/sport-screen/sport_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-  // Import your Electronic Devices Screen
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
@@ -21,12 +26,17 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    
     return BlocConsumer<AppCubitCubit, AppCubitState>(
       listener: (context, state) {
         if (state is GetHomeDataSucess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Categories fetched successfully'),
+            SnackBar(
+              content: const Text('Categories fetched successfully'),
+              backgroundColor: Colors.yellow[700],  
             ),
           );
         }
@@ -42,13 +52,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           final categories = cubit.categories;
           if (categories?.data?.data != null) {
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 13),
+              padding: EdgeInsets.symmetric(
+                vertical: screenHeight * 0.02,  
+                horizontal: screenWidth * 0.03,  
+              ),
               child: GridView.builder(
                 itemCount: categories!.data!.data!.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 10,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: screenWidth < 400 ? 2 : 3, 
+                  mainAxisSpacing: screenHeight * 0.02,  
+                  crossAxisSpacing: screenWidth * 0.02,  
                 ),
                 itemBuilder: (context, index) {
                   final category = cubit.categories!.data!.data![index];
@@ -56,17 +69,52 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   return GestureDetector(
                     onTap: () {
                       if (categories.data!.data![index].name == 'اجهزه الكترونيه') {
-                        // Navigate to Electronic Devices Screen
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const ElectronicDevicesScreen(),
                           ),
                         );
+                      } else if (categories.data!.data![index].name == 'مكافحة كورونا') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FightingCorona(),
+                          ),
+                        );
+                      } else if (categories.data!.data![index].name == 'رياضة') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SportScreen(),
+                          ),
+                        );
+                      } else if (categories.data!.data![index].name == 'ادوات الاناره') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Lightingtools(),
+                          ),
+                        );
+                      } else if (categories.data!.data![index].name == 'ملابس') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ClothesScreen(),
+                          ),
+                        );
+                      } else if (categories.data!.data![index].name == 'البقالة') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const GroceriesScreen(),
+                          ),
+                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('${categories.data!.data![index].name} category tapped!'),
+                            backgroundColor: Colors.yellow[700],  
                           ),
                         );
                       }
@@ -84,6 +132,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           Text(
                             category.name!,
                             textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,  
+                              fontWeight: FontWeight.bold,  
+                              fontSize: screenWidth * 0.04,  
+                            ),
                           ),
                         ],
                       ),

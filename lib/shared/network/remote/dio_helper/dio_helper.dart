@@ -1,12 +1,12 @@
  import 'package:dio/dio.dart';
 
 abstract class DioHelper{
-  static Dio? _dio;  // object of dio
+  static Dio? _dio;  
 
-   static Future<void> initializeDio() async{   // function for initialize Dio
+   static Future<void> initializeDio() async{   
 
     _dio ??= Dio(   
-        BaseOptions( // control the baseurl
+        BaseOptions(  
           baseUrl: "https://student.valuxapps.com/api/",
           receiveDataWhenStatusError: true,
           validateStatus: (status) => status! <= 500,
@@ -26,7 +26,7 @@ abstract class DioHelper{
     required String endpoint , 
     String? token,
    Map<String,dynamic>? queryParamters
-   })async{  // function the type is a Future
+   })async{   
    _dio!.options.headers = {
     "Authorization": token,
    };
@@ -38,11 +38,24 @@ abstract class DioHelper{
     String? token,
    Map<String,dynamic>? queryParamters,
    Map<String,dynamic>? data
-   })async{  // function the type is a Future
+   })async{  
    _dio!.options.headers = {
     "Authorization": token,
    };
            return await _dio!.post(endpoint , queryParameters: queryParamters ,data: data);
+  }
+
+
+   static Future<Response>putRequest({
+    required String endpoint , 
+    String? token,
+   Map<String,dynamic>? queryParamters,
+   Map<String,dynamic>? data
+   })async{  
+   _dio!.options.headers = {
+    "Authorization": token,
+   };
+           return await _dio!.put(endpoint , queryParameters: queryParamters ,data: data);
   }
 }
 

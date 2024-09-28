@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
 
-class MyTextformfield extends StatefulWidget {
-  final String hintText;
+class MyTextFormFeild extends StatelessWidget {
+  final String title;
+  final String labelText;
   final Icon prefixIcon;
   final TextEditingController controller;
   final bool isPassword;
 
-  const MyTextformfield(
-      {super.key,
-      required this.hintText,
-      required this.prefixIcon,
-      required this.controller,
-      this.isPassword = false});
+  const MyTextFormFeild({
+    super.key,
+    required this.title,
+    required this.labelText,
+    required this.prefixIcon,
+    required this.controller,
+    this.isPassword = false,
+  });
 
-  @override
-  State<MyTextformfield> createState() => _MyTextformfield();
-}
-
-class _MyTextformfield extends State<MyTextformfield> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: widget.controller,
-      obscureText: widget.isPassword,
+      controller: controller,
+      obscureText: isPassword,
       decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
-            borderSide: BorderSide(color: Colors.white, width: 2.0),
-          ),
-          hintText: widget.hintText,
-          hintStyle: TextStyle(fontSize: 20.0),
-          prefixIcon: widget.prefixIcon),
+        labelText: labelText,
+        prefixIcon: prefixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+      ),
     );
   }
 }

@@ -30,7 +30,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void Signup(
-      {required String Username,
+  {required String Username,
       required String email,
       required String password,
       required String phoneNumber}) async {

@@ -6,7 +6,11 @@ class ElectronicDeviceCard extends StatelessWidget {
   final String imageUrl;
   final String price;
 
-  ElectronicDeviceCard({required this.name, required this.imageUrl, required this.price});
+  ElectronicDeviceCard({
+    required this.name,
+    required this.imageUrl,
+    required this.price,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +32,22 @@ class ElectronicDeviceCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               name,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,  
+              ),
+              maxLines: 2,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
               price,
-              style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[700],  
+              ),
               maxLines: 2,
             ),
           ),

@@ -18,7 +18,7 @@ class AccountInfoField extends StatelessWidget {
             label,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.grey[700],
+              color: Colors.yellow[700], 
               fontWeight: FontWeight.bold,
             ),
           ),

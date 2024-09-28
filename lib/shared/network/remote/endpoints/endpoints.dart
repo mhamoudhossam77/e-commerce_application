@@ -10,7 +10,25 @@ const USER = "profile";
 
 const LOGOUT ="logout";
 
-const CATEGORES_Detalies ="categories/44";
+const CATEGORES_ElectronicDevice ="categories/44";
 
 
 
+
+
+const CATEGORES_FlightingCorona ="categories/43";
+
+const CATEGORES_Sport ="categories/42";
+
+const CATEGORES_Lightingtools ="categories/40";
+
+const CATEGORES_Clothes ="categories/46";
+
+const CATEGORES_Groceries ="categories/47";
+
+const FAVOURITES = "favorites";
+
+const CART = "carts";
+
+const UPADATED_PROFILE = "update-profile";
+>>>>>>> 3ed714811b0065ea2460d01f5737029f64dccd84

@@ -2,7 +2,7 @@ import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
 import 'package:ecommerce/screen/login-screen/login-screen.dart';
 import 'package:ecommerce/screen/mainlayout/Main-Layout.dart';
 import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
-import 'package:ecommerce/widget/signup-text-feild.dart';
+import 'package:ecommerce/widget/login-text-feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,143 +18,165 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.yellow[700],  
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-             
               SizedBox(
                 height: MediaQuery.of(context).size.height / 6,
               ),
+              
               Text(
-                "Sign Up",
+                "Sign up",
                 style: TextStyle(
-                    fontSize: 48.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                  fontSize: 48.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,  
+                ),
               ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Text(
-                "Create your account",
-                style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black),
-              ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
-              MyTextformfield(
-                hintText: "Username",
-                prefixIcon: Icon(Icons.person),
+              
+               
+              MyTextFormFeild(
                 controller: _usernameController,
+                title: "username",
+                labelText: "Enter your username",  
+                prefixIcon: const Icon(
+                  Icons.person,
+                ),
               ),
-              SizedBox(
-                height: 25.0,
+              const SizedBox(
+                height: 20.0,
               ),
-              MyTextformfield(
-                hintText: "Email",
-                prefixIcon: Icon(Icons.email_outlined),
+
+              
+              MyTextFormFeild(
                 controller: _emailController,
+                title: "email",
+                labelText: "Enter your email",
+                prefixIcon: const Icon(
+                  Icons.email_outlined,
+                ),
               ),
-              SizedBox(
-                height: 25.0,
+              const SizedBox(
+                height: 20.0,
               ),
-              MyTextformfield(
-                hintText: "password",
-                prefixIcon: Icon(Icons.lock),
+
+               
+              MyTextFormFeild(
                 controller: _passwordController,
+                title: "password",
+                labelText: "Enter your password",
+                prefixIcon: const Icon(
+                  Icons.lock_outline,
+                ),
                 isPassword: true,
               ),
-              SizedBox(
-                height: 25.0,
+              const SizedBox(
+                height: 20.0,
               ),
-              MyTextformfield(
-                hintText: " phone",
-                prefixIcon: Icon(Icons.phone),
+
+               
+              MyTextFormFeild(
                 controller: _phoneController,
+                title: "phone",
+                labelText: "Enter your phone",
+                prefixIcon: const Icon(
+                  Icons.phone,
+                ),
               ),
-              SizedBox(
-                height: 25.0,
+              const SizedBox(
+                height: 50.0,
               ),
+
+               
               BlocConsumer<AuthCubit, AuthState>(
-                listener: (context, state)async {
+                listener: (context, state) async {
                   if (state is SignupError) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
                         backgroundColor: Colors.red,
-                        content: Text(state.message)));
+                        content: Text(state.message),
+                      ),
+                    );
                   }
 
                   if (state is SignupSucess) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.green,
-                      content: Text(state.model.message!),
-                    ));
-                     await CacheHelper.storeInCache(
-                        "token", state.model.data!.token!);
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (_) => MainLayout()));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.green,
+                        content: Text(state.model.message!),
+                      ),
+                    );
+                    await CacheHelper.storeInCache(
+                      "token", state.model.data!.token!,
+                    );
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => MainLayout()),
+                    );
                   }
                 },
                 builder: (context, state) {
                   var cubit = AuthCubit.get(context);
                   if (state is SignupLoading) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
                   return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,  
+                      minimumSize: const Size(double.infinity, 55.0),
+                    ),
                     onPressed: () {
                       cubit.Signup(
-                          Username: _usernameController.text,
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                          phoneNumber: _phoneController.text);
+                        Username: _usernameController.text,
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                        phoneNumber: _phoneController.text,
+                      );
                     },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(
-                            vertical: 15.0, horizontal: 120.0)),
-                    child: Text(
+                    child: const Text(
                       "Sign up",
                       style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                        color: Colors.white,  
+                        fontSize: 18.0,
+                      ),
                     ),
                   );
                 },
               ),
-              SizedBox(
-                height: 25.0,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Already have an account?",
-                    style: TextStyle(fontSize: 18.0, color: Colors.black),
+                    style: TextStyle(color: Colors.black),  
                   ),
                   TextButton(
-                      onPressed: () {
-                         Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (_) =>  LoginScreen()));
-                      },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ))
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const LoginScreen(), 
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(color: Colors.blue), 
+                    ),
+                  ),
                 ],
               ),
             ],
