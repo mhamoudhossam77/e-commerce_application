@@ -5,6 +5,7 @@ import 'package:ecommerce/model/home-model.dart';
 import 'package:ecommerce/product-Detalies-Screen/Product_detalis_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -25,6 +26,7 @@ class _Homescreen extends State<Homescreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.grey,
         body: BlocConsumer<AppCubitCubit, AppCubitState>(
           listener: (context, state) {
             if (state is ChangeProductFavouriteSuccessfully) {
@@ -101,12 +103,14 @@ class _Homescreen extends State<Homescreen> {
                     const SizedBox(height: 20.0),
 
                      
-                    const Text(
+                     Text(
                       "Categories",
-                      style: TextStyle(
+                      style: GoogleFonts.acme(
+                      textStyle:TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,  
+                      ),
                       ),
                     ),
                     const SizedBox(height: 15.0),
@@ -157,12 +161,14 @@ class _Homescreen extends State<Homescreen> {
                     const SizedBox(height: 15.0),
 
                     
-                    const Text(
+                     Text(
                       "All Products",
-                      style: TextStyle(
+                      style: GoogleFonts.acme(
+                      textStyle:TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                         color:  Colors.black 
+                      ),
                       ),
                     ),
                     const SizedBox(height: 35.0),
@@ -251,7 +257,7 @@ class _Homescreen extends State<Homescreen> {
                                             style: TextStyle(
                                               fontSize: 12.0,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.yellow[700],  
+                                              color: Colors.blueGrey,  
                                             ),
                                           ),
                                           IconButton(
@@ -274,7 +280,7 @@ class _Homescreen extends State<Homescreen> {
                                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.yellow[700],  
+                                          backgroundColor: Colors.blueGrey,  
                                         ),
                                         onPressed: () {
                                           cubit.changeProductCart(id: product.id!);
@@ -287,7 +293,7 @@ class _Homescreen extends State<Homescreen> {
                                         },
                                         child: const Text(
                                           "Add to Cart",
-                                          style: TextStyle(color: Colors.white),  
+                                          style: TextStyle(color: Colors.black),  
                                         ),
                                       ),
                                     ),

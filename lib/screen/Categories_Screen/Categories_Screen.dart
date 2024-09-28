@@ -34,9 +34,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       listener: (context, state) {
         if (state is GetHomeDataSucess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('Categories fetched successfully'),
-              backgroundColor: Colors.yellow[700],  
+            const SnackBar(
+              content: Text('Categories fetched successfully'),
+              backgroundColor: Colors.green,  
             ),
           );
         }
@@ -114,7 +114,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('${categories.data!.data![index].name} category tapped!'),
-                            backgroundColor: Colors.yellow[700],  
+                            backgroundColor: Colors.blue,  
                           ),
                         );
                       }

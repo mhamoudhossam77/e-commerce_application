@@ -1,10 +1,11 @@
- import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
+import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
 import 'package:ecommerce/screen/mainlayout/Main-Layout.dart';
 import 'package:ecommerce/screen/signup-screen/signup-screen.dart';
 import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
 import 'package:ecommerce/widget/login-text-feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,11 +17,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  Colors.red,  
+      backgroundColor: Colors.grey,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
@@ -30,16 +31,17 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 6,
               ),
-               
               const SizedBox(
                 height: 20.0,
               ),
               Text(
                 "Login",
-                style: TextStyle(
-                  fontSize: 48.0,
-                  fontWeight: FontWeight.bold,
-                  color:  Colors.white,  
+                style: GoogleFonts.acme(
+                  textStyle: TextStyle(
+                    fontSize: 48.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -48,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
               MyTextFormFeild(
                 controller: _emailController,
                 title: "email",
-                labelText: "Enter your email",  
+                labelText: "Enter your email",
                 prefixIcon: const Icon(
                   Icons.email_outlined,
                 ),
@@ -59,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
               MyTextFormFeild(
                 controller: _passwordController,
                 title: "password",
-                labelText: "Enter your password", 
+                labelText: "Enter your password",
                 prefixIcon: const Icon(
                   Icons.lock_outline,
                 ),
@@ -104,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,  
+                      backgroundColor: Colors.blueGrey,
                       minimumSize: const Size(
                         double.infinity,
                         55.0,
@@ -116,11 +118,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         password: _passwordController.text,
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Login",
-                      style: TextStyle(
-                        color: Colors.white,  
-                        fontSize: 18.0,
+                      style:GoogleFonts.acme(
+                       textStyle : TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 25.0,
+                       ),
                       ),
                     ),
                   );
@@ -131,7 +136,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   const Text(
                     "Don't have an account?",
-                    style: TextStyle(color: Colors.black),  
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                    ),
                   ),
                   TextButton(
                     onPressed: () {
@@ -142,9 +150,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Signup",
-                      style: TextStyle(color: Colors.blue),  
+                      style: GoogleFonts.acme(
+                      textStyle:TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueGrey,
+                        fontSize: 23.0,
+                      ),
+                      ),
                     ),
                   ),
                 ],

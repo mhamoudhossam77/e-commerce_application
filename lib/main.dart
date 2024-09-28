@@ -1,5 +1,8 @@
  import 'package:ecommerce/cubit/app_cubit/app_cubit_cubit.dart';
 import 'package:ecommerce/cubit/auth_cubit/auth_cubit.dart';
+import 'package:ecommerce/screen/Cart_Screen/cart_screen.dart';
+import 'package:ecommerce/screen/Categories_Screen/Categories_Screen.dart';
+import 'package:ecommerce/screen/home-screen/home-screen.dart';
 import 'package:ecommerce/screen/login-screen/login-screen.dart';
 import 'package:ecommerce/screen/mainlayout/Main-Layout.dart';
 import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: token == null ? const LoginScreen() : const MainLayout(),
+         home: token == null ? const LoginScreen() : const MainLayout(),
       ),
     );
   }

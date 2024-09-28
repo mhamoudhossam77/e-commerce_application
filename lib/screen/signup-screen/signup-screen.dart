@@ -5,6 +5,7 @@ import 'package:ecommerce/shared/network/local/cache-helper/Cache_Helper.dart';
 import 'package:ecommerce/widget/login-text-feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -22,7 +23,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[700],  
+      backgroundColor: Colors.grey,  
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
@@ -35,10 +36,12 @@ class _SignupScreenState extends State<SignupScreen> {
               
               Text(
                 "Sign up",
-                style: TextStyle(
+                style: GoogleFonts.acme(
+                textStyle : TextStyle(
                   fontSize: 48.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,  
+                ),
                 ),
               ),
               const SizedBox(
@@ -135,7 +138,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   }
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,  
+                      backgroundColor: Colors.blueGrey,  
                       minimumSize: const Size(double.infinity, 55.0),
                     ),
                     onPressed: () {
@@ -146,11 +149,14 @@ class _SignupScreenState extends State<SignupScreen> {
                         phoneNumber: _phoneController.text,
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Sign up",
-                      style: TextStyle(
-                        color: Colors.white,  
-                        fontSize: 18.0,
+                      style: GoogleFonts.acme(
+                      textStyle : TextStyle(
+                        color: Colors.black,  
+                        fontSize: 23.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       ),
                     ),
                   );
@@ -161,7 +167,10 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   const Text(
                     "Already have an account?",
-                    style: TextStyle(color: Colors.black),  
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22.0,
+                      ),  
                   ),
                   TextButton(
                     onPressed: () {
@@ -172,9 +181,14 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Login",
-                      style: TextStyle(color: Colors.blue), 
+                      style: GoogleFonts.acme(
+                      textStyle : TextStyle(
+                        color: Colors.blueGrey,
+                        fontSize: 22.0,
+                        ), 
+                      ),
                     ),
                   ),
                 ],

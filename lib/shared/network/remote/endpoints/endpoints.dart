@@ -12,10 +12,6 @@ const LOGOUT ="logout";
 
 const CATEGORES_ElectronicDevice ="categories/44";
 
-
-
-
-
 const CATEGORES_FlightingCorona ="categories/43";
 
 const CATEGORES_Sport ="categories/42";
@@ -31,4 +27,4 @@ const FAVOURITES = "favorites";
 const CART = "carts";
 
 const UPADATED_PROFILE = "update-profile";
->>>>>>> 3ed714811b0065ea2460d01f5737029f64dccd84
+

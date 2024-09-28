@@ -27,8 +27,8 @@ class _MainLayoutState extends State<MainLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.yellow[700],  
+        unselectedItemColor: Colors.grey[500],
+        selectedItemColor: Colors.blueGrey,  
         onTap: (value) {
           setState(() {
             currentIdx = value;
