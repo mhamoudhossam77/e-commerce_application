@@ -30,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
-        backgroundColor:  Colors.yellow[700],
+        backgroundColor:  Colors.grey,
       ),
       body: BlocConsumer<AppCubitCubit, AppCubitState>(
         listener: (context, state) {
@@ -80,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: TextStyle(
                           fontSize: screenWidth * 0.06,  
                           fontWeight: FontWeight.bold,
-                          color: Colors.yellow[700],  
+                          color: Colors.black,  
                         ),
                       ),
                       SizedBox(height: screenHeight * 0.01),
@@ -108,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     );
                   },
-                  highlightColor: Colors.yellow[700],  
+                  highlightColor: Colors.black,  
                 ),
                 ProfileOption(
                   icon: Icons.settings,
@@ -116,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onTap: () {
                      
                   },
-                  highlightColor: Colors.yellow[700],  
+                  highlightColor: Colors.black,  
                 ),
                 ProfileOption(
                   icon: Icons.security,
@@ -124,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onTap: () {
                    
                   },
-                  highlightColor: Colors.yellow[700],  
+                  highlightColor: Colors.black,  
                 ),
                 ProfileOption(
                   icon: Icons.help,
@@ -132,7 +132,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onTap: () {
                   
                   },
-                  highlightColor: Colors.yellow[700],  
+                  highlightColor: Colors.black,  
                 ),
                 BlocConsumer<AppCubitCubit, AppCubitState>(
                   listener: (context, state) {
